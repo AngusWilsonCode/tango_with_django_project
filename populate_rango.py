@@ -9,24 +9,32 @@ from rango.models import Category, Page
 def populate():
     python_pages = [
         {'title':'Official Python Tutorial',
+        'views':1,
          'url':'http://docs.python.org/3/tutorial/'},
         {'title':'How to Think like a Computer Scientist',
+        'views':3,
          'url':'http://www.greenteapress.com/thinkpython/'},
         {'title':'Learn Python in 10 Minutes',
+        'views':9,
          'url':'http://www.korokithakis.net/tutorials/python/'} ]
      
     django_pages = [
         {'title':'Official Django Tutorial',
+        'views':2,
          'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/'},
         {'title':'Django Rocks',
+        'views':22,
          'url':'http://www.djangorocks.com/'},
         {'title':'How to Tango with Django',
+         'views':13,
          'url':'http://www.tangowithdjango.com/'} ]
     
     other_pages = [
         {'title':'Bottle',
+        'views':6,
          'url':'http://bottlepy.org/docs/dev/'},
         {'title':'Flask',
+        'views':44,
          'url':'http://flask.pocoo.org'} ]
     
     cats = {'Python': {'pages': python_pages, 'views' : 128, 'likes' : 64},
@@ -36,7 +44,7 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data['views'], cat_data['likes'] )
         for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'])
+            add_page(c, p['title'], p['url'], p['views'])
     
     for c in Category.objects.all():
         for p in Page.objects.filter(category = c):
